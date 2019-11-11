@@ -47,8 +47,11 @@ void inorder(struct node *root,vector<node*> &tree){
 }
 
 struct node* balance(vector<node*> list, int inicio, int final){
+    if(inicio>final){
+        return NULL;
+    }
     int mid = ceil((final+inicio)/2);
-    node* root = newNode(list.at(mid));
+    struct node* root = newNode(list.at(mid)->key);
     root->left = balance(list,inicio, mid-1);
     root->right = balance(list,mid+1,final);
     return root;
@@ -67,11 +70,9 @@ int main(){
     vector<node*> lista;
     inorder(root,lista);
     
-    
-    cout<<lista.size();
+    preorder(balance(lista,0,lista.size()-1));
     // print inoder traversal of the BST
     //preorder(root);
     
     return 0;
 }
-
